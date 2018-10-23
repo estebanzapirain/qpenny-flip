@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://AreaFueraPantalla.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": Vector2Array( 0, 0, 0, 0, 0.652695, -1.26241, 0, 0, 0, 0, 721.399, -0.731827, 0, 0, 0, 0, 722.797, 1280.06, 0, 0, 0, 0, 2.79718, 1280.06, 0, 0, 0, 0, 0.652695, -1.26241 )
+}
+
+[node name="Main" type="Node"]
+
+script/script = ExtResource( 1 )
+Coin = ExtResource( 2 )
+
+[node name="MobTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.75
+one_shot = false
+autostart = false
+
+[node name="StartTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
+[node name="GameEndingTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="CoinPath" type="Path2D" parent="."]
+
+transform/pos = Vector2( -2, 0 )
+curve = SubResource( 1 )
+
+[node name="CoinSpawnLocation" type="PathFollow2D" parent="CoinPath"]
+
+transform/pos = Vector2( 0.652695, -1.26241 )
+transform/rot = -0.0421791
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = true
+cubic_interp = true
+loop = true
+lookahead = 4.0
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="AreaFueraPantalla" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -132.063, 1355.55 )
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+
+[connection signal="timeout" from="GameEndingTimer" to="." method="_on_GameEndingTimer_timeout"]
+
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+
+[connection signal="sale_de_pantalla" from="AreaFueraPantalla" to="." method="scores"]
+
+
