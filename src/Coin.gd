@@ -1,7 +1,10 @@
+# Este objeto Coin debería extender una clase Qubit que le asigne sus valores de probabilidad de estar en 0 o 1
+
 extends RigidBody2D
 
 export (int) var min_speed # Minimum speed range.
 export (int) var max_speed # Maximum speed range.
+
 var state
 var mob_types = ["white", "black"]
 
