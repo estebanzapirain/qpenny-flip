@@ -8,3 +8,6 @@ func qstate_set(state)):
 
 func qstate_get():
 	return qstate
+	
+func qstate_show():
+	print(qstate)
