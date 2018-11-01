@@ -47,6 +47,7 @@ func _on_MobTimer_timeout():
     coin.set_rot(direction)
     # Choose the velocity.
     coin.set_linear_velocity(Vector2(rand_range(coin.min_speed, coin.max_speed), 0).rotated(direction))
+    
 
 
 func scores():
@@ -67,5 +68,6 @@ func _on_GameEndingTimer_timeout():
     elif playtime <= stopCoinSpawnTime:
         stop_coin_spawn()
 
-
+func on_hadamard_power_up():
+    get_node("Qubit").h_gate()
 
