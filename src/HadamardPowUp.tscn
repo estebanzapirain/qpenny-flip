@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://HadamardPowUp.gd" type="Script" id=1]
+[ext_resource path="res://QPF_assets/art/HadamardPU.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 236.165
+
+[node name="HadamardPowUp" type="RigidBody2D"]
+
+transform/rot = -90.0347
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 0.3, 0, 0, 0.3, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 2
+collision/mask = 0
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+min_speed = 250
+max_speed = 350
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/scale = Vector2( 0.3, 0.3 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( -10.0066, 2.0067 )
+transform/rot = -89.8067
+transform/scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="Visibility" type="VisibilityNotifier2D" parent="."]
+
+rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="exit_screen" from="Visibility" to="." method="_on_Visibility_exit_screen"]
+
+

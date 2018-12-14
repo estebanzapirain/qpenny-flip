@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Coin.tscn" type="PackedScene" id=2]
-[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
-[ext_resource path="res://AreaFueraPantalla.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/qubit_node/qubit.gd" type="Script" id=5]
-[ext_resource path="res://addons/qubit_node/button.png" type="Texture" id=6]
+[ext_resource path="res://AreaNoTocable.tscn" type="PackedScene" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://AreaFueraPantalla.tscn" type="PackedScene" id=5]
+[ext_resource path="res://HadamardPowUp.tscn" type="PackedScene" id=6]
+[ext_resource path="res://MainMenu.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -18,11 +19,12 @@ _data = {
 
 script/script = ExtResource( 1 )
 Coin = ExtResource( 2 )
+AreaNoTocable = ExtResource( 3 )
 
-[node name="MobTimer" type="Timer" parent="."]
+[node name="CoinTimer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 0.75
+wait_time = 1.0
 one_shot = false
 autostart = false
 
@@ -33,7 +35,21 @@ wait_time = 2.0
 one_shot = true
 autostart = false
 
+[node name="HadPowUpTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = false
+autostart = false
+
 [node name="GameEndingTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="CoinsInMenuTimer" type="Timer" parent="."]
 
 process_mode = 1
 wait_time = 1.0
@@ -42,6 +58,8 @@ autostart = false
 
 [node name="CoinPath" type="Path2D" parent="."]
 
+editor/display_folded = true
+visibility/visible = false
 transform/pos = Vector2( -2, 0 )
 curve = SubResource( 1 )
 
@@ -57,40 +75,58 @@ cubic_interp = true
 loop = true
 lookahead = 4.0
 
-[node name="HUD" parent="." instance=ExtResource( 3 )]
+[node name="HUD" parent="." instance=ExtResource( 4 )]
 
-[node name="AreaFueraPantalla" parent="." instance=ExtResource( 4 )]
+[node name="AreaFueraPantalla" parent="." instance=ExtResource( 5 )]
 
+visibility/visible = false
 transform/pos = Vector2( -132.063, 1355.55 )
 
-[node name="Qubit" type="Button" parent="."]
+[node name="AreaNoTocable" parent="." instance=ExtResource( 3 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 12.0
-margin/bottom = 20.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
-script/script = ExtResource( 5 )
-__meta__ = {
-"_editor_icon": ExtResource( 6 )
-}
-qstate = [ 1.0, 0.0 ]
+visibility/visible = false
 
-[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[node name="HadamardPowUp" parent="." instance=ExtResource( 6 )]
+
+visibility/visible = false
+transform/pos = Vector2( 0.180481, -297.871 )
+
+[node name="MainMenu" parent="." instance=ExtResource( 7 )]
+
+[connection signal="timeout" from="CoinTimer" to="." method="_on_CoinTimer_timeout"]
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 
+[connection signal="timeout" from="HadPowUpTimer" to="." method="_on_HadPowUpTimer_timeout"]
+
 [connection signal="timeout" from="GameEndingTimer" to="." method="_on_GameEndingTimer_timeout"]
+
+[connection signal="timeout" from="CoinsInMenuTimer" to="." method="_on_CoinsInMenuTimer_timeout"]
+
+[connection signal="back_to_menu" from="HUD" to="." method="_on_HUD_back_to_menu"]
+
+[connection signal="next_level" from="HUD" to="." method="_on_HUD_next_level"]
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 
-[connection signal="sale_de_pantalla" from="AreaFueraPantalla" to="." method="scores"]
+[connection signal="start_game" from="HUD" to="AreaNoTocable" method="appear"]
+
+[connection signal="stop_game" from="HUD" to="." method="_on_HUD_stop_game"]
+
+[connection signal="body_enter" from="AreaFueraPantalla" to="AreaFueraPantalla" method="_on_AreaFueraPantalla_body_enter"]
+
+[connection signal="resta_punto" from="AreaFueraPantalla" to="." method="decrease_score"]
+
+[connection signal="suma_punto" from="AreaFueraPantalla" to="." method="scores"]
+
+[connection signal="HadPowUP_on" from="HadamardPowUp" to="AreaNoTocable" method="activateHadamard"]
+
+[connection signal="level_selected" from="MainMenu" to="." method="_on_MainMenu_level_selected"]
+
+[connection signal="to_help" from="MainMenu" to="." method="stop_coin_spawn_in_menu"]
+
+[connection signal="to_level_select" from="MainMenu" to="." method="stop_coin_spawn_in_menu"]
+
+[connection signal="to_main_menu" from="MainMenu" to="." method="coins_spawn_in_main_menu"]
 
 

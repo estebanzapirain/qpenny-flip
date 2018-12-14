@@ -1,14 +1,18 @@
-signal sale_de_pantalla
+signal suma_punto
+signal resta_punto
 
 extends Area2D
 
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+    pass
+    
 
-func _on_AreaFueraPantalla_body_enter_shape( body_id, body, body_shape, area_shape ):
-    var coin = body
-    if coin.state == 1:
-        emit_signal("sale_de_pantalla")
+
+func _on_AreaFueraPantalla_body_enter( body ):
+    if body.state == 1:  #body will be the coin
+        emit_signal("suma_punto")
+    else:  #body.state == 0
+        emit_signal("resta_punto")
+
+
