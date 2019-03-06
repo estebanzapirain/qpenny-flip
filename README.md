@@ -49,7 +49,7 @@ Care was taken to achieve results consistent with open source standards, making 
 
 The game is distributed under the GNU Licence. Its source code and exports to different platforms are available at https://github.com/estebanzapirain/qpenny-flip.
 
-The game was coded in Godot, an open source, cross-platform videogame development engine created by Juan Linietsky (godotengine.org).
+The game was coded in Godot (http://godotengine.org), an open source, cross-platform videogame development engine created by Juan Linietsky .
 
 Media used in the game are under Creative Commons licences.
 </p>
