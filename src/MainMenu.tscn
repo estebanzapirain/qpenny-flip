@@ -1,10 +1,17 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=19 format=1]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://LSBt.tscn" type="PackedScene" id=2]
 [ext_resource path="res://QPF_assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://QPF_assets/art/help.jpg" type="Texture" id=4]
-[ext_resource path="res://QPF_assets/music/menu_music.ogg" type="AudioStream" id=5]
+[ext_resource path="res://QPF_assets/art/infinitySymbol.png" type="Texture" id=4]
+[ext_resource path="res://QPF_assets/art/VolumeLevel2.png" type="Texture" id=5]
+[ext_resource path="res://QPF_assets/art/VolumeLevel1.png" type="Texture" id=6]
+[ext_resource path="res://QPF_assets/art/volumeMutedIcon.png" type="Texture" id=7]
+[ext_resource path="res://QPF_assets/art/fullVolumeIcon.png" type="Texture" id=8]
+[ext_resource path="res://QPF_assets/music/menu_music.ogg" type="AudioStream" id=9]
+[ext_resource path="res://HelpMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Credits.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Fondo.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -15,12 +22,50 @@ font/font = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 
-font/size = 96
+font/size = 52
 font/use_mipmaps = false
 font/use_filter = false
 font/font = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
+
+font/size = 52
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 3 )
+
+[sub_resource type="SpriteFrames" id=4]
+
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "volume_level_2",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "volume_level_1",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": false,
+"name": "muted",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "full_volume",
+"speed": 0.0
+} ]
+
+[sub_resource type="DynamicFont" id=5]
+
+font/size = 26
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
 
 font/size = 64
 font/use_mipmaps = false
@@ -62,7 +107,7 @@ margin/top = 71.0
 margin/right = 800.0
 margin/bottom = 374.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.184314, 0.458824, 0.901961, 1 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
 text = "Quantum 
 Penny Flip"
 align = 1
@@ -76,34 +121,34 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 199.0
-margin/top = 996.0
-margin/right = 542.0
-margin/bottom = 1118.0
+margin/left = 189.0
+margin/top = 1124.0
+margin/right = 532.0
+margin/bottom = 1223.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.184314, 0.458824, 0.901961, 1 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Exit"
 flat = false
 
-[node name="HelpButton" type="Button" parent="InitialMenu"]
+[node name="CreditsButton" type="Button" parent="InitialMenu"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 201.0
-margin/top = 805.0
-margin/right = 542.0
-margin/bottom = 927.0
+margin/left = 189.0
+margin/top = 984.0
+margin/right = 532.0
+margin/bottom = 1083.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.184314, 0.458824, 0.901961, 1 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Help"
+text = "Credits"
 flat = false
 
 [node name="LevelSelectButton" type="Button" parent="InitialMenu"]
@@ -112,38 +157,136 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 202.0
-margin/top = 618.0
-margin/right = 538.0
-margin/bottom = 740.0
+margin/left = 189.0
+margin/top = 554.0
+margin/right = 535.0
+margin/bottom = 660.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.184314, 0.458824, 0.901961, 1 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Play"
+text = "Level Select"
 flat = false
 
-[node name="HelpSprite" type="Sprite" parent="."]
+[node name="EndlessModeButton" type="Button" parent="InitialMenu"]
 
-visibility/visible = false
-transform/pos = Vector2( 1732.03, 641.599 )
-transform/scale = Vector2( 1.33707, 1.33178 )
-texture = ExtResource( 4 )
-
-[node name="BackButton" type="Button" parent="."]
-
-visibility/visible = false
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 2.0
-margin/top = 1194.0
-margin/right = 205.0
-margin/bottom = 1278.0
+margin/left = 189.0
+margin/top = 693.0
+margin/right = 536.0
+margin/bottom = 799.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "         mode"
+flat = false
+
+[node name="InfinitySprite" type="Sprite" parent="InitialMenu/EndlessModeButton"]
+
+transform/pos = Vector2( 90, 56 )
+transform/scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 4 )
+
+[node name="HelpButton" type="Button" parent="InitialMenu"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 188.0
+margin/top = 839.0
+margin/right = 534.0
+margin/bottom = 941.0
 custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0.184314, 0.458824, 0.901961, 1 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Instructions"
+flat = false
+
+[node name="MuteVolumeButton" type="Button" parent="InitialMenu"]
+
+editor/display_folded = true
+visibility/self_opacity = 0.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 20.0
+margin/right = 80.0
+margin/bottom = 79.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+
+[node name="VolumeSprite" type="AnimatedSprite" parent="InitialMenu/MuteVolumeButton"]
+
+transform/pos = Vector2( 36.8091, 29.4826 )
+transform/scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 4 )
+animation = "full_volume"
+
+[node name="VolumeSlider" type="HSlider" parent="InitialMenu/MuteVolumeButton"]
+
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 85.0
+margin/top = 5.0
+margin/right = 156.0
+margin/bottom = 21.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 100.0
+range/exp_edit = false
+range/rounded = false
+tick_count = 0
+ticks_on_borders = false
+focus_mode = 2
+
+[node name="VersionLabel" type="Label" parent="InitialMenu"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 521.0
+margin/top = 1247.0
+margin/right = 748.0
+margin/bottom = 1328.0
+custom_fonts/font = SubResource( 5 )
+text = "Version 1.0.0
+"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="BackButton" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 1197.0
+margin/right = 203.0
+margin/bottom = 1281.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -152,6 +295,7 @@ flat = false
 
 [node name="LevelSelectMenu" type="Control" parent="."]
 
+visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -163,21 +307,49 @@ margin/bottom = 40.0
 
 [node name="MenuMusic" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 5 )
+stream/stream = ExtResource( 9 )
 stream/play = false
 stream/loop = false
-stream/volume_db = 0.0
+stream/volume_db = -5.0
 stream/autoplay = false
 stream/paused = false
 stream/loop_restart_time = 0.0
 stream/buffering_ms = 500
 
+[node name="HelpMenu" parent="." instance=ExtResource( 10 )]
+
+visibility/visible = false
+
+[node name="Credits" parent="." instance=ExtResource( 11 )]
+
+visibility/visible = false
+
+[node name="Fondo" parent="." instance=ExtResource( 12 )]
+
 [connection signal="pressed" from="InitialMenu/ExitButton" to="." method="_on_ExitButton_pressed"]
 
-[connection signal="pressed" from="InitialMenu/HelpButton" to="." method="_on_HelpButton_pressed"]
+[connection signal="pressed" from="InitialMenu/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 
 [connection signal="pressed" from="InitialMenu/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
 
+[connection signal="focus_enter" from="InitialMenu/EndlessModeButton" to="." method="_on_EndlessModeButton_focus_enter"]
+
+[connection signal="focus_exit" from="InitialMenu/EndlessModeButton" to="." method="_on_EndlessModeButton_focus_exit"]
+
+[connection signal="mouse_enter" from="InitialMenu/EndlessModeButton" to="." method="_on_EndlessModeButton_mouse_enter"]
+
+[connection signal="mouse_exit" from="InitialMenu/EndlessModeButton" to="." method="_on_EndlessModeButton_mouse_exit"]
+
+[connection signal="pressed" from="InitialMenu/EndlessModeButton" to="." method="_on_EndlessModeButton_pressed"]
+
+[connection signal="pressed" from="InitialMenu/HelpButton" to="." method="_on_HelpButton_pressed"]
+
+[connection signal="pressed" from="InitialMenu/MuteVolumeButton" to="." method="_on_MuteVolumeButton_pressed"]
+
+[connection signal="value_changed" from="InitialMenu/MuteVolumeButton/VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]
+
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+
+[connection signal="change_help_tip" from="HelpMenu" to="." method="_on_HelpMenu_change_help_tip"]
 
 

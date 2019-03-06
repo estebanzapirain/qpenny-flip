@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Coin.tscn" type="PackedScene" id=2]
-[ext_resource path="res://AreaNoTocable.tscn" type="PackedScene" id=3]
-[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://AreaFueraPantalla.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ZonaNoTocable.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ZonaTrigger.tscn" type="PackedScene" id=4]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://HadamardPowUp.tscn" type="PackedScene" id=6]
 [ext_resource path="res://MainMenu.tscn" type="PackedScene" id=7]
 
@@ -19,7 +19,8 @@ _data = {
 
 script/script = ExtResource( 1 )
 Coin = ExtResource( 2 )
-AreaNoTocable = ExtResource( 3 )
+ZonaNoTocable = ExtResource( 3 )
+ZonaTriggerFP = ExtResource( 4 )
 
 [node name="CoinTimer" type="Timer" parent="."]
 
@@ -56,6 +57,48 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
+[node name="CoinsInHMenuTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 6.0
+one_shot = false
+autostart = false
+
+[node name="CoinsInCreditsTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.2
+one_shot = false
+autostart = false
+
+[node name="EndlessModeStartTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="TimeScoreTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="EndlessLevelAdvanceTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 4.0
+one_shot = false
+autostart = false
+
+[node name="ColorChangerTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.25
+one_shot = false
+autostart = false
+
 [node name="CoinPath" type="Path2D" parent="."]
 
 editor/display_folded = true
@@ -75,16 +118,7 @@ cubic_interp = true
 loop = true
 lookahead = 4.0
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
-
-[node name="AreaFueraPantalla" parent="." instance=ExtResource( 5 )]
-
-visibility/visible = false
-transform/pos = Vector2( -132.063, 1355.55 )
-
-[node name="AreaNoTocable" parent="." instance=ExtResource( 3 )]
-
-visibility/visible = false
+[node name="HUD" parent="." instance=ExtResource( 5 )]
 
 [node name="HadamardPowUp" parent="." instance=ExtResource( 6 )]
 
@@ -103,30 +137,50 @@ transform/pos = Vector2( 0.180481, -297.871 )
 
 [connection signal="timeout" from="CoinsInMenuTimer" to="." method="_on_CoinsInMenuTimer_timeout"]
 
-[connection signal="back_to_menu" from="HUD" to="." method="_on_HUD_back_to_menu"]
+[connection signal="timeout" from="CoinsInHMenuTimer" to="." method="_on_CoinsInHMenuTimer_timeout"]
+
+[connection signal="timeout" from="CoinsInCreditsTimer" to="." method="coin_spawn_in_credits"]
+
+[connection signal="timeout" from="EndlessModeStartTimer" to="." method="_on_EndlessModeStartTimer_timeout"]
+
+[connection signal="timeout" from="TimeScoreTimer" to="." method="_on_TimeScoreTimer_timeout"]
+
+[connection signal="timeout" from="EndlessLevelAdvanceTimer" to="." method="_on_EndlessLevelAdvanceTimer_timeout"]
+
+[connection signal="timeout" from="ColorChangerTimer" to="." method="_on_ColorChangerTimer_timeout"]
+
+[connection signal="back_to_level_select_menu" from="HUD" to="." method="_on_HUD_back_to_level_select_menu"]
+
+[connection signal="back_to_main_menu" from="HUD" to="." method="_on_HUD_back_to_main_menu"]
 
 [connection signal="next_level" from="HUD" to="." method="_on_HUD_next_level"]
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 
-[connection signal="start_game" from="HUD" to="AreaNoTocable" method="appear"]
+[connection signal="start_game_endless" from="HUD" to="." method="new_game_endless"]
 
 [connection signal="stop_game" from="HUD" to="." method="_on_HUD_stop_game"]
 
-[connection signal="body_enter" from="AreaFueraPantalla" to="AreaFueraPantalla" method="_on_AreaFueraPantalla_body_enter"]
+[connection signal="stop_game_endless" from="HUD" to="." method="_on_HUD_stop_game_endless"]
 
-[connection signal="resta_punto" from="AreaFueraPantalla" to="." method="decrease_score"]
+[connection signal="HadPowUP_on" from="HadamardPowUp" to="." method="activateHadPU"]
 
-[connection signal="suma_punto" from="AreaFueraPantalla" to="." method="scores"]
-
-[connection signal="HadPowUP_on" from="HadamardPowUp" to="AreaNoTocable" method="activateHadamard"]
+[connection signal="change_help_tip" from="MainMenu" to="." method="_on_MainMenu_change_help_tip"]
 
 [connection signal="level_selected" from="MainMenu" to="." method="_on_MainMenu_level_selected"]
 
-[connection signal="to_help" from="MainMenu" to="." method="stop_coin_spawn_in_menu"]
+[connection signal="to_credits" from="MainMenu" to="." method="coins_spawn_in_credits"]
+
+[connection signal="to_endless_mode" from="MainMenu" to="." method="prep_endless_mode"]
+
+[connection signal="to_help" from="MainMenu" to="." method="coins_spawn_in_Help_Menu"]
 
 [connection signal="to_level_select" from="MainMenu" to="." method="stop_coin_spawn_in_menu"]
 
 [connection signal="to_main_menu" from="MainMenu" to="." method="coins_spawn_in_main_menu"]
+
+[connection signal="to_main_menu" from="MainMenu" to="." method="stop_coin_spawn_in_Help_Menu"]
+
+[connection signal="to_main_menu" from="MainMenu" to="." method="stop_coin_spawn_in_Credits"]
 
 

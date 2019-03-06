@@ -23,6 +23,7 @@ func _input_event(viewport, event, shape_idx):
     if !QPFGlobals.isPaused() and event.type == InputEvent.MOUSE_BUTTON:
             if event.button_index == BUTTON_LEFT and event.pressed:
                 init()
+                get_node("TouchSound").play()
                 emit_signal("HadPowUP_on")
 
 func _on_Visibility_exit_screen():

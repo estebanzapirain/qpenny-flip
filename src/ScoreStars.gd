@@ -3,6 +3,8 @@ extends Control
 const ANIMATED_TYPES = ["unfilled", "filled"]
 
 var currentStar = 1
+var effectTypes = ["","",""]
+var volumeDb = [17,20,23]
 
 func _ready():
 	hide_stars()
@@ -25,12 +27,24 @@ func show_stars_anim():
 func update_stars_cant(cantStars):
     if cantStars == 3:
         change_anim_stars(1, 1, 1)
+        effectTypes[0] = "FilledEffect"
+        effectTypes[1] = "FilledEffect"
+        effectTypes[2] = "FilledEffect"
     elif cantStars == 2:
         change_anim_stars(1, 1, 0)
+        effectTypes[0] = "FilledEffect"
+        effectTypes[1] = "FilledEffect"
+        effectTypes[2] = "UnfilledEffect"
     elif cantStars == 1:
         change_anim_stars(1, 0, 0)
+        effectTypes[0] = "FilledEffect"
+        effectTypes[1] = "UnfilledEffect"
+        effectTypes[2] = "UnfilledEffect"
     else: 
         change_anim_stars(0, 0, 0)
+        effectTypes[0] = "UnfilledEffect"
+        effectTypes[1] = "UnfilledEffect"
+        effectTypes[2] = "UnfilledEffect"
 
 func change_anim_stars(anim1, anim2, anim3):
         get_node("Star1").animation = ANIMATED_TYPES[anim1]
@@ -42,6 +56,10 @@ func change_anim_stars(anim1, anim2, anim3):
 func _on_ShowStarTimer_timeout():
 	get_node("Star1").show()
 	get_node("Star" + str(currentStar)).show()
+	
+	get_node(effectTypes[currentStar - 1]).set_volume_db(volumeDb[currentStar - 1])
+	get_node(effectTypes[currentStar - 1]).play(0)
+	
 	if currentStar < 3:
 		currentStar += 1
 	else: #currentStar == 3
