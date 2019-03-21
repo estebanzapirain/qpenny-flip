@@ -1,0 +1,166 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://Credits.gd" type="Script" id=1]
+[ext_resource path="res://ZonaTrigger.tscn" type="PackedScene" id=2]
+[ext_resource path="res://QPF_assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://QPF_assets/music/credits.opus" type="AudioStream" id=4]
+[ext_resource path="res://QPF_assets/music/coinSmash.ogg" type="AudioStream" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+
+font/size = 70
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+
+font/size = 50
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+
+font/size = 50
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 3 )
+
+[node name="Credits" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 1 )
+ZonaTrigger = ExtResource( 2 )
+
+[node name="CreditsTitleLeft" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -3.0
+margin/top = 498.0
+margin/right = 365.0
+margin/bottom = 596.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.421749, 0.535156, 0.0167236, 1 )
+text = "Thanks fo"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CreditsTitleRight" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 368.0
+margin/top = 498.0
+margin/right = 709.0
+margin/bottom = 596.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.419608, 0.533333, 0.0156863, 1 )
+text = "r playing!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CreditsBodyLeft1" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 1.0
+margin/top = 626.0
+margin/right = 364.0
+margin/bottom = 725.0
+custom_fonts/font = SubResource( 2 )
+text = "Francisco \"P"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CreditsBodyRight1" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 366.0
+margin/top = 626.0
+margin/right = 723.0
+margin/bottom = 725.0
+custom_fonts/font = SubResource( 3 )
+text = "ancho\" Calo"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CreditsBodyLeft2" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 1.0
+margin/top = 716.0
+margin/right = 364.0
+margin/bottom = 815.0
+custom_fonts/font = SubResource( 2 )
+text = "Bensou"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CreditsBodyRight2" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 366.0
+margin/top = 716.0
+margin/right = 723.0
+margin/bottom = 815.0
+custom_fonts/font = SubResource( 3 )
+text = "nd.com"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="CreditsSong" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 4 )
+stream/play = false
+stream/loop = false
+stream/volume_db = 15.0
+stream/autoplay = false
+stream/paused = false
+stream/loop_restart_time = 0.1
+stream/buffering_ms = 500
+
+[node name="CoinSmash" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 5 )
+stream/play = false
+stream/loop = false
+stream/volume_db = -10.0
+stream/autoplay = false
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
+

@@ -1,0 +1,160 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://ZonaNoTocable.gd" type="Script" id=1]
+[ext_resource path="res://QPF_assets/art/HadamardSquare.png" type="Texture" id=2]
+[ext_resource path="res://QPF_assets/art/HadamardSquare2.png" type="Texture" id=3]
+[ext_resource path="res://QPF_assets/art/Had_PU_line.png" type="Texture" id=4]
+[ext_resource path="res://QPF_assets/art/Had_PU_line2.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8.35452, 7.12242 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "on",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "turning_off",
+"speed": 6.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "on",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "turning_off",
+"speed": 6.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "on",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "turning_off",
+"speed": 6.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "on",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "turning_off",
+"speed": 6.0
+} ]
+
+[node name="MovementBody" type="KinematicBody2D"]
+
+transform/pos = Vector2( 342, 619 )
+input/pickable = true
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+
+[node name="ZonaNoTocable" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 63.2364, 0, 0, 21.0167, 7.78015, 15.0045 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaNoTocable"]
+
+transform/pos = Vector2( 7.78015, 15.0045 )
+transform/scale = Vector2( 63.2364, 21.0167 )
+shape = SubResource( 1 )
+trigger = true
+_update_shape_index = 0
+
+[node name="ColorFrame" type="ColorFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -521.0
+margin/top = -179.0
+margin/right = 537.0
+margin/bottom = 209.0
+color = Color( 0.929412, 0.0470588, 0.0470588, 0.521569 )
+
+[node name="TurnOffHPUTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = false
+
+[node name="AnimatedSpriteUp" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( 17, -216 )
+transform/scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 2 )
+animation = "on"
+
+[node name="AnimatedSpriteDown" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( 17, 246 )
+transform/scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 3 )
+animation = "on"
+
+[node name="AnimatedSpriteLineUp" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( 19.2954, -176 )
+transform/scale = Vector2( 2.44875, 1 )
+frames = SubResource( 4 )
+animation = "on"
+
+[node name="AnimatedSpriteLineDown" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( 19.2954, 206 )
+transform/scale = Vector2( 2.44875, 1 )
+frames = SubResource( 5 )
+animation = "on"
+
+[node name="AnimationChangeTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="body_enter" from="ZonaNoTocable" to="." method="_on_ZonaNoTocable_body_enter"]
+
+[connection signal="body_exit" from="ZonaNoTocable" to="." method="_on_ZonaNoTocable_body_exit"]
+
+[connection signal="timeout" from="TurnOffHPUTimer" to="." method="_on_TurnOffHPUTimer_timeout"]
+
+[connection signal="timeout" from="AnimationChangeTimer" to="." method="_on_AnimationChangeTimer_timeout"]
+
+
