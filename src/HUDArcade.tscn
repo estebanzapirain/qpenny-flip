@@ -1,0 +1,139 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=1]
+[ext_resource path="res://HUDArcade.gd" type="Script" id=2]
+[ext_resource path="res://QPF_assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://ScoreStars.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 80
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 42
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 48
+font_data = ExtResource( 3 )
+
+[node name="HUDArcade" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="LevelLabel" type="Label" parent="." index="0"]
+margin_left = 477.0
+margin_top = 3.0
+margin_right = 596.0
+margin_bottom = 81.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = -1
+custom_constants/shadow_as_outline = -1
+text = "L1"
+
+[node name="MessageLabel" parent="." index="3"]
+margin_top = -1191.0
+margin_right = 361.0
+margin_bottom = -870.0
+
+[node name="GameTimerLabel" type="Label" parent="." index="4"]
+margin_left = 297.883
+margin_top = 5.92659
+margin_right = 471.883
+margin_bottom = 202.927
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = -1
+custom_constants/shadow_as_outline = -1
+text = "10
+"
+
+[node name="PMLayer" parent="." index="6"]
+editor/display_folded = false
+
+[node name="FondoNegro" parent="PMLayer/PauseMenu" index="0"]
+margin_bottom = 1220.0
+
+[node name="VBoxContainer" parent="PMLayer/PauseMenu" index="1"]
+margin_bottom = 1220.0
+
+[node name="VBoxContainer2" parent="PMLayer/PauseMenu/VBoxContainer" index="0"]
+margin_bottom = 610.0
+
+[node name="TitleLabel" parent="PMLayer/PauseMenu/VBoxContainer/VBoxContainer2" index="0"]
+margin_top = 0.0
+margin_bottom = 275.0
+
+[node name="ScoreStars" parent="PMLayer/PauseMenu/VBoxContainer/VBoxContainer2" index="1" instance=ExtResource( 4 )]
+margin_left = 0.0
+margin_top = 279.0
+margin_right = 725.0
+margin_bottom = 554.0
+rect_min_size = Vector2( 0, 275 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NextRankLabel" type="Label" parent="PMLayer/PauseMenu/VBoxContainer/VBoxContainer2" index="2"]
+margin_top = 558.0
+margin_right = 725.0
+margin_bottom = 610.0
+custom_fonts/font = SubResource( 5 )
+text = "To next rank: 25 pts."
+align = 1
+valign = 1
+
+[node name="PMButtons" parent="PMLayer/PauseMenu/VBoxContainer" index="1"]
+margin_top = 635.0
+margin_bottom = 1220.0
+
+[node name="NextLevelButton" type="Button" parent="PMLayer/PauseMenu/VBoxContainer/PMButtons" index="0"]
+margin_left = 187.0
+margin_right = 537.0
+margin_bottom = 85.0
+rect_min_size = Vector2( 350, 85 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 6 )
+text = "Next Level"
+
+[node name="ResumeButton" parent="PMLayer/PauseMenu/VBoxContainer/PMButtons" index="1"]
+margin_top = 125.0
+margin_bottom = 210.0
+
+[node name="StartButton" parent="PMLayer/PauseMenu/VBoxContainer/PMButtons" index="2"]
+margin_top = 250.0
+margin_bottom = 335.0
+
+[node name="LevelMenuButton" type="Button" parent="PMLayer/PauseMenu/VBoxContainer/PMButtons" index="3"]
+margin_left = 187.0
+margin_top = 375.0
+margin_right = 537.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 350, 85 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 7 )
+text = "Level Menu"
+
+[node name="MainMenuButton" parent="PMLayer/PauseMenu/VBoxContainer/PMButtons" index="4"]
+margin_top = 500.0
+margin_bottom = 585.0
+
+[node name="ScoreStarsTimer" type="Timer" parent="Timers" index="1"]
+wait_time = 1.8
+one_shot = true
+
+[node name="NextRankLabelTimer" type="Timer" parent="Timers" index="2"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="pressed" from="PMLayer/PauseMenu/VBoxContainer/PMButtons/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]
+[connection signal="pressed" from="PMLayer/PauseMenu/VBoxContainer/PMButtons/LevelMenuButton" to="." method="_on_LevelMenuButton_pressed"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/starUnfilled.ogg-0e6bf4ba66e139088361d46c38c0d7fa.oggstr"
+
+[deps]
+
+source_file="res://QPF_assets/music/starUnfilled.ogg"
+dest_files=[ "res://.import/starUnfilled.ogg-0e6bf4ba66e139088361d46c38c0d7fa.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

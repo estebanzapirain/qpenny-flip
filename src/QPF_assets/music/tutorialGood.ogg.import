@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tutorialGood.ogg-eef3a562a6a2e1af2eb4a368ecddaea0.oggstr"
+
+[deps]
+
+source_file="res://QPF_assets/music/tutorialGood.ogg"
+dest_files=[ "res://.import/tutorialGood.ogg-eef3a562a6a2e1af2eb4a368ecddaea0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

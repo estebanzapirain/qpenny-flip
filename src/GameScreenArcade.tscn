@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GameScreen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://GameScreenArcade.gd" type="Script" id=2]
+[ext_resource path="res://HUDArcade.tscn" type="PackedScene" id=3]
+
+[node name="GameScreenArcade" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="HUDArcade" parent="." index="2" instance=ExtResource( 3 )]
+
+[node name="StartTimer" type="Timer" parent="Timers" index="2"]
+wait_time = 2.0
+one_shot = true
+
+[node name="GETimer" type="Timer" parent="Timers" index="3"]
+
+[connection signal="back_to_level_select_menu" from="HUDArcade" to="." method="_on_HUDArcade_back_to_level_select_menu"]
+[connection signal="back_to_main_menu" from="HUDArcade" to="." method="_on_HUD_back_to_main_menu"]
+[connection signal="next_level" from="HUDArcade" to="." method="_on_HUDArcade_next_level"]
+[connection signal="start_game" from="HUDArcade" to="." method="new_game"]
+[connection signal="stop_game" from="HUDArcade" to="." method="_on_HUDArcade_stop_game"]
+[connection signal="timeout" from="Timers/StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="Timers/GETimer" to="." method="_on_GETimer_timeout"]
