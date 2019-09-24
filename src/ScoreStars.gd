@@ -13,13 +13,16 @@ func hide_stars():
 	get_node("Star1").hide()
 	get_node("Star2").hide()
 	get_node("Star3").hide()
+	hide() #tiene que estar para que el container del pause menu detecte que no esta
 
 func show_stars():
+	show() #tiene que estar para que el container del pause menu detecte que esta
 	get_node("Star1").show()
 	get_node("Star2").show()
 	get_node("Star3").show()
 
 func show_stars_anim():
+	show()   #tiene que estar para que el container del pause menu detecte que esta
 	get_node("ShowStarTimer").start()
 
 
@@ -65,3 +68,5 @@ func _on_ShowStarTimer_timeout():
 	else: #currentStar == 3
 		get_node("ShowStarTimer").stop()
 		currentStar = 1
+
+

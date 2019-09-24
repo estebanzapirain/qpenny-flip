@@ -3,6 +3,26 @@ extends Node
 const COIN_WIDHT = 100
 const CPU_TRY_WT = 0.8
 
+const BASE_COIN_TIMER_WT = 1
+const COIN_TIMER_WT_DEC_RATE = 0.45 / (24 - 1)
+#Es cant a decrementar / (cantNiveles - 1)
+
+const BASE_MIN_HAD_PU_WT = 10
+const MIN_HAD_PU_TIMER_WT_INC_RATE = float(10) / (24 - 1)
+
+const BASE_HAD_PU_WT_AMP = 3
+const HAD_PU_TIMER_WT_AMP_INC_RATE = float(3) / (24 - 1)
+
+const BASE_MIN_COIN_SPEED = 200
+const COIN_MIN_SPEED_INC_RATE = float(100) / (24 - 1)
+
+const BASE_COIN_SPEED_AMP = 25
+const COIN_SPEED_AMP_INC_RATE = float(25) / (24 - 1)
+
+const MAIN_MENU_COIN_SPEED = 400
+const HELP_COIN_SPEED = 300
+const CREDITS_COIN_SPEED = 500
+
 const PROB_FLIP_BASE = 0.2
 const PROB_FLIP_INC = 0.3 / (24 - 1)
 
@@ -23,6 +43,8 @@ var creditsCoinType = [0,1,2,3]
 var probTam1 = PROB_TAM1_BASE
 var probTam2 = PROB_TAM2_BASE
 
+var minCoinSpeed
+var maxCoinSpeed
 
 func _ready():
 	pass
@@ -110,7 +132,7 @@ func removeElementCreditsCoinType():
 	
 	return element
 
-func setup_credits_coin(coin):
+func setup_credits_coin_state(coin):
 	var creditsCoinType = removeElementCreditsCoinType()
 	
 	if(creditsCoinType == 0):
@@ -127,4 +149,8 @@ func setup_credits_coin(coin):
 		
 		coin.activateHBuff()
 	
-	  
+
+func update_CoinSpeeds(level):
+    minCoinSpeed = BASE_MIN_COIN_SPEED + COIN_MIN_SPEED_INC_RATE * (level - 1)
+    maxCoinSpeed = minCoinSpeed + BASE_COIN_SPEED_AMP + COIN_SPEED_AMP_INC_RATE * (level - 1)
+    #maxCoinSpeed = minCoinSpedd + speedAmplitude

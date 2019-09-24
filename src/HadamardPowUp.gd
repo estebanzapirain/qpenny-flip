@@ -1,14 +1,12 @@
 signal HadPowUP_on
 
-extends RigidBody2D
+extends "Droppable.gd"
 
 const BASE_HAD_PU_SPEED = 250
 const BASE_HAD_PU_SPEED_AMP = 50
-const HAD_PU_SPEED_INC_RATE = 1.025
-const HAD_PU_SPEED_AMP_INC_RATE = 1.025
+const HAD_PU_SPEED_INC_RATE = 100 / (24 - 1)
+const HAD_PU_SPEED_AMP_INC_RATE = 25 / (24 - 1)
 
-export (int) var min_speed # Minimum speed range.
-export (int) var max_speed # Maximum speed range.
 
 func _ready():
     init()
@@ -19,18 +17,19 @@ func init():
     set_linear_velocity(Vector2(0,0))
     
 
-func _input_event(viewport, event, shape_idx):
-    if !QPFGlobals.isPaused() and event.type == InputEvent.MOUSE_BUTTON:
-            if event.button_index == BUTTON_LEFT and event.pressed:
-                init()
-                get_node("TouchSound").play()
-                emit_signal("HadPowUP_on")
+func _on_AreaTocable_pressed():
+	init()
+	get_node("TouchSound").play()
+	emit_signal("HadPowUP_on")
 
 func _on_Visibility_exit_screen():
     init()
 
 func update_Speeds(levelAct):
-    min_speed = BASE_HAD_PU_SPEED * pow(HAD_PU_SPEED_INC_RATE,levelAct - 1)
-    max_speed = min_speed + BASE_HAD_PU_SPEED_AMP * pow(HAD_PU_SPEED_AMP_INC_RATE,levelAct - 1)
-
+	var aux_min_speed = BASE_HAD_PU_SPEED + HAD_PU_SPEED_INC_RATE * (levelAct - 1)
+	var aux_max_speed = aux_min_speed + BASE_HAD_PU_SPEED_AMP + HAD_PU_SPEED_AMP_INC_RATE * (levelAct - 1)
+	setMinMaxSpeed(aux_min_speed, aux_max_speed)
   
+
+
+
