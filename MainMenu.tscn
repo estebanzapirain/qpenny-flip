@@ -1,0 +1,210 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://QPF_assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://QPF_assets/art/btStart/borders_play_button.png" type="Texture" id=3]
+[ext_resource path="res://QPF_assets/art/btStart/filling_play_button.png" type="Texture" id=4]
+[ext_resource path="res://QPF_assets/art/infinityModeIcon/infinity_mode_borders.png" type="Texture" id=5]
+[ext_resource path="res://QPF_assets/art/infinityModeIcon/infinity_mode_filling.png" type="Texture" id=6]
+[ext_resource path="res://QPF_assets/art/helpIcon/help_icon_borders.png" type="Texture" id=7]
+[ext_resource path="res://QPF_assets/art/helpIcon/help_icon_filling.png" type="Texture" id=8]
+[ext_resource path="res://QPF_assets/art/creditsIcon/Credits_icon_borders.png" type="Texture" id=9]
+[ext_resource path="res://QPF_assets/art/creditsIcon/Credits_icon_filling.png" type="Texture" id=10]
+[ext_resource path="res://QPF_assets/art/fullVolumeIcon.png" type="Texture" id=11]
+[ext_resource path="res://QPF_assets/art/volumeMutedIcon.png" type="Texture" id=12]
+[ext_resource path="res://Fondo.tscn" type="PackedScene" id=13]
+[ext_resource path="res://QPF_assets/music/menu_music.ogg" type="AudioStream" id=14]
+[ext_resource path="res://BackButton.tscn" type="PackedScene" id=15]
+[ext_resource path="res://CoinPath.tscn" type="PackedScene" id=16]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 54
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "unmuted",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "muted",
+"speed": 0.0
+} ]
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 2 )
+
+[node name="MainMenu" type="Control"]
+script = ExtResource( 1 )
+
+[node name="LevelSelectMenu" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="InitialMenu" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TitleLabel" type="Label" parent="InitialMenu"]
+margin_top = 72.0
+margin_right = 721.0
+margin_bottom = 316.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
+custom_colors/font_color_shadow = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = -1
+custom_constants/shadow_as_outline = -1
+text = "Quantum 
+Penny Flip"
+align = 1
+
+[node name="LevelSelectButton" type="Button" parent="InitialMenu"]
+editor/display_folded = true
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 177.651
+margin_top = 371.5
+margin_right = 534.651
+margin_bottom = 731.5
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Borders" type="Sprite" parent="InitialMenu/LevelSelectButton"]
+position = Vector2( 178.349, 179.5 )
+texture = ExtResource( 3 )
+
+[node name="Filling" type="Sprite" parent="InitialMenu/LevelSelectButton"]
+position = Vector2( 178.349, 179.5 )
+texture = ExtResource( 4 )
+
+[node name="EndlessModeButton" type="Button" parent="InitialMenu"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 238.0
+margin_top = 769.0
+margin_right = 462.0
+margin_bottom = 995.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Borders" type="Sprite" parent="InitialMenu/EndlessModeButton"]
+position = Vector2( 111, 115 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 5 )
+
+[node name="Filling" type="Sprite" parent="InitialMenu/EndlessModeButton"]
+position = Vector2( 111, 115 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 6 )
+
+[node name="HelpButton" type="Button" parent="InitialMenu"]
+editor/display_folded = true
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 1.0
+margin_top = 1032.0
+margin_right = 126.0
+margin_bottom = 1154.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Borders" type="Sprite" parent="InitialMenu/HelpButton"]
+position = Vector2( 63, 62 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+
+[node name="Filling" type="Sprite" parent="InitialMenu/HelpButton"]
+position = Vector2( 63, 62 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 8 )
+
+[node name="CreditsButton" type="Button" parent="InitialMenu"]
+editor/display_folded = true
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -1.0
+margin_top = 1159.0
+margin_right = 127.0
+margin_bottom = 1281.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.941176, 0.321569, 0.145098, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Borders" type="Sprite" parent="InitialMenu/CreditsButton"]
+position = Vector2( 63, 62 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 9 )
+
+[node name="Filling" type="Sprite" parent="InitialMenu/CreditsButton"]
+position = Vector2( 63, 62 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 10 )
+
+[node name="MuteVolumeButton" type="Button" parent="InitialMenu"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 87.0
+margin_bottom = 73.0
+
+[node name="VolumeSprite" type="AnimatedSprite" parent="InitialMenu"]
+position = Vector2( 42.7631, 35.2455 )
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 4 )
+animation = "unmuted"
+
+[node name="VersionLabel" type="Label" parent="InitialMenu"]
+margin_left = 310.0
+margin_top = 1240.0
+margin_right = 719.0
+margin_bottom = 1321.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color_shadow = Color( 0.129412, 0.129412, 0.129412, 1 )
+custom_constants/shadow_offset_x = -2
+custom_constants/shadow_offset_y = -1
+custom_constants/shadow_as_outline = -1
+text = "Version 1.0.0
+"
+align = 2
+
+[node name="Fondo" parent="." instance=ExtResource( 13 )]
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -31.0
+autoplay = true
+bus = "Music"
+
+[node name="BackButton" parent="." instance=ExtResource( 15 )]
+visible = false
+margin_left = 2.16833
+margin_top = 1194.87
+margin_right = 175.168
+margin_bottom = 1280.87
+
+[node name="CoinsInMainMenuTimer" type="Timer" parent="."]
+
+[node name="CoinPath" parent="." instance=ExtResource( 16 )]
+[connection signal="pressed" from="InitialMenu/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
+[connection signal="pressed" from="InitialMenu/EndlessModeButton" to="." method="_on_EndlessModeButton_pressed"]
+[connection signal="pressed" from="InitialMenu/HelpButton" to="." method="_on_HelpButton_pressed"]
+[connection signal="pressed" from="InitialMenu/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="InitialMenu/MuteVolumeButton" to="." method="_on_MuteVolumeButton_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="timeout" from="CoinsInMainMenuTimer" to="." method="coin_spawn_in_main_menu"]

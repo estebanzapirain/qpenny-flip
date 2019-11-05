@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/s.ogg-861f839ba5897b2aa13b1214a161c9cf.oggstr"
+
+[deps]
+
+source_file="res://QPF_assets/music/s.ogg"
+dest_files=[ "res://.import/s.ogg-861f839ba5897b2aa13b1214a161c9cf.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
