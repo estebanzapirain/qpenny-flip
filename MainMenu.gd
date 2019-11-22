@@ -1,6 +1,6 @@
 extends Control
 
-var LsButton = load("res://LSBt.tscn")
+
 
 const INI_X_LS_BT = 40
 const INC_X_LS_BT = 235
@@ -11,6 +11,7 @@ const CANT_LS_BT_Y = 8
 const CANT_LS_BT_X = 3
 
 var Coin = load("res://Coin.tscn")
+var LsButton = load("res://LSBt.tscn")
 
 onready var levelSelectMenu = $LevelSelectMenu 
 onready var volumeSprite = $InitialMenu/VolumeSprite
@@ -24,6 +25,7 @@ onready var backButton = $BackButton
 onready var fondo = $Fondo
 onready var menuMusic = $MenuMusic
 onready var initialMenu = $InitialMenu
+onready var coinGenerator = $CoinGenerator
 
 var loaded = false
 var cantStars  = []
@@ -221,11 +223,7 @@ func coins_spawn_in_main_menu():
 	coin_spawn_in_main_menu() #lanzo el primer coin
 
 func coin_spawn_in_main_menu():
-	var coin = Coin.instance()
-	add_child(coin)
-	
-	coin.setUpForMainMenu()
-	coin.dropFromAboveRand()
+	coinGenerator.dropCoinMainMenu()
 	
 
 

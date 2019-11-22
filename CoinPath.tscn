@@ -2,7 +2,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0.0443611, 0.0847931, 0, 0, 0, 0, 719.577, 0.474991, 0, 0, 0, 0, 720.48, 1279.78 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0.0443611, 0.0847931, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 720.48, 1279.78 )
 }
 
 [node name="CoinPath" type="Path2D"]
@@ -11,4 +11,3 @@ curve = SubResource( 1 )
 [node name="CoinSpawnLocation" type="PathFollow2D" parent="."]
 position = Vector2( 0.0443611, 0.0847931 )
 rotation = 0.000542295
-

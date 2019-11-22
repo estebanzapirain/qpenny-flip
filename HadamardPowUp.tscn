@@ -7,13 +7,12 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 236.165
 
-[node name="HadamardPowUp" type="RigidBody2D"]
+[node name="HadamardPowUp" type="KinematicBody2D"]
 position = Vector2( 7.53668, 12.0587 )
 rotation = 1.5714
 z_index = 101
 collision_layer = 0
 collision_mask = 0
-gravity_scale = 0.0
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -40,6 +39,5 @@ margin_left = -73.0
 margin_top = -74.0
 margin_right = 71.0
 margin_bottom = 79.0
-
 [connection signal="screen_exited" from="Visibility" to="." method="_on_Visibility_exit_screen"]
 [connection signal="pressed" from="AreaTocable" to="." method="_on_AreaTocable_pressed"]

@@ -12,10 +12,7 @@ const X_INI_ZONA_TRIGGER_FP = -132
 const Y_INI_ZONA_TRIGGER_FP = 1384.5
 
 
-onready var hud
-onready var hadPUTimer = $Timers/HadPowUpTimer
-onready var hadamardPU = $HadamardPowUp
-onready var coinTimer = $Timers/CoinTimer
+
 
 
 
@@ -25,6 +22,11 @@ var Coin = load("res://Coin.tscn")
 var ZonaNoTocable = load("res://ZonaNoTocable.tscn")
 var ZonaTriggerFP = load("res://ZonaTrigger.tscn")
 
+onready var coinGenerator = $CoinGenerator
+onready var hud
+onready var hadPUTimer = $Timers/HadPowUpTimer
+onready var hadamardPU = $HadamardPowUp
+onready var coinTimer = $Timers/CoinTimer
 
 
 var zonaNoTocableAct 
@@ -76,18 +78,21 @@ func update_Prob_Flip_CPU(level):
 	CoinGlobals.updateProbFlipCPU(level)
 
 func _on_CoinTimer_timeout():
-	var coin = Coin.instance()
-	add_child(coin)
-	coin.setMinMaxSpeed( minCoinSpeed, maxCoinSpeed )
-	coin.dropFromAboveRand()
+	#coin.setMinMaxSpeed( minCoinSpeed, maxCoinSpeed )
+	coinGenerator.dropCoinGameScreen()
 
 func _on_HadPowUpTimer_timeout():
-    hadPUTimer.set_wait_time( minHad_PU_WT + (randi() % int(had_PU_WT_Amp)) )
-    hadamardPU.dropFromAboveRand()
+	hadPUTimer.set_wait_time( minHad_PU_WT + (randi() % int(had_PU_WT_Amp)) )
+	print("veloc hadpu")
+	print(hadamardPU.speed)
+	coinGenerator.dropHCoinGameScreen(hadamardPU)
+	
 
 func update_CoinSpeeds(level):
 	minCoinSpeed = CoinGlobals.BASE_MIN_COIN_SPEED + CoinGlobals.COIN_MIN_SPEED_INC_RATE * (level - 1)
 	maxCoinSpeed = minCoinSpeed + CoinGlobals.BASE_COIN_SPEED_AMP + CoinGlobals.COIN_SPEED_AMP_INC_RATE * (level - 1)
+	coinGenerator.setCoinMinSpd(minCoinSpeed)
+	coinGenerator.setCoinMaxSpd(maxCoinSpeed)
 	#maxCoinSpeed = minCoinSpedd + speedAmplitude
 
 func update_Had_PU_Speeds(level):

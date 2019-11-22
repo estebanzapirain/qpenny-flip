@@ -18,6 +18,8 @@ onready var cantTipsMessage = $Messages/CantTipsMessage
 onready var scoreTimer = $ScoreTimer
 onready var scoreMessage = $Messages/ScoreMessage
 
+onready var coinGenerator = $CoinGenerator
+
 
 var Coin = load("res://Coin.tscn")
 
@@ -128,7 +130,6 @@ func changeFontColor(color):
 
 
 func _on_NextButton_pressed():
-	eliminateCoins()
 	
 	CoinGlobals.nextTip()
 	
@@ -146,7 +147,6 @@ func _on_NextButton_pressed():
 
 
 func _on_BackButton_pressed():
-	eliminateCoins()
 	
 	CoinGlobals.prevTip()
 	
@@ -162,8 +162,7 @@ func _on_BackButton_pressed():
 	change_help_tip()
 
 func eliminateCoins(): #for transitions between tips
-	for coin in get_tree().get_nodes_in_group("Coins"):
-		coin.queue_free()
+	coinGenerator.deactivate_active_coins()
 
 
 func coins_spawn_in_Help_Menu():
@@ -177,14 +176,10 @@ func coins_spawn_in_Help_Menu():
 	coin_spawn_in_Help_Menu() #lanzo el primer coin
 
 func coin_spawn_in_Help_Menu():
-	var coin = Coin.instance()
-	add_child(coin)
 	activateCondition()
-	
-	coin.setUpForHelp()
-	CoinGlobals.setup_help_coin(coin)
-	
-	coin.dropFromAboveCentered()
+	coinGenerator.dropCoinHelpMenu()
+
+
 
 func _notification(notif):
 	if notif == MainLoop.NOTIFICATION_WM_QUIT_REQUEST || notif == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:

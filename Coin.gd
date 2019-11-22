@@ -1,3 +1,5 @@
+signal out_of_view
+
 extends "Droppable.gd"
 
 
@@ -6,29 +8,43 @@ const COIN_HADAMARD_BLACK_TYPES = ["hadamard_black_1", "hadamard_black_2"]
 const COIN_HADAMARD_WHITE_TYPES = ["hadamard_white_1", "hadamard_white_2"]
 
 
-onready var animSprite = $AnimatedSprite
+onready var animSprite = $AnimSprite
 onready var timerCpuFlips = $TimerCPUFlips
 onready var flipSound = $FlipSound
 
 var state
 var stateAnt
 var touchable = true
-var coinHBuffed = false
-var activated = false setget set_activated,is_activated
-#para controlar si un coin esta siendo usado o no
+var HBuffed = false setget setHBuffed, isHBuffed
+var id setget setId,getId
+var active = true        setget setActive,isActive
+var in_screen = false    setget setIn_screen,isIn_screen
 
 func _ready():
 	set_process_input(true)
-	general_setup()
 	animSprite.play()
-    
-func is_activated():
-	return activated
+   
+func getId():
+	return id
 
-func set_activated(cond):
-	activated = cond
+func setId(num):
+	id = num
 
-func general_setup():
+func setActive(cond:bool)->void:
+	active = cond
+
+func isActive()->bool:
+	return active
+
+func setIn_screen(cond:bool)->void:
+	active = cond
+
+func isIn_screen()->bool:
+	return active
+
+
+
+func general_setup()->void:
 	if(!CoinGlobals.isHad_PU_on()):
 		state = randi() % 2
 	else:   #si esta actuvado el power up de hadamard siempre salen negras
@@ -64,7 +80,7 @@ func flipCpu():
 	changeCoinAnim()
 
 func changeCoinAnim():
-	if !coinHBuffed:
+	if !isHBuffed():
 		animSprite.animation = COIN_BASE_TYPES[state]
 	else:
 		if stateAnt == 1:
@@ -80,30 +96,35 @@ func turnoCPU():
 
 func intentoCPU():        
 	var juegaCPU = (randi() % 101) <= CoinGlobals.getProbFlipCPU() * 100  
-	if juegaCPU and (state == 1 or ( coinHBuffed and stateAnt == 1) ):
+	if juegaCPU and (state == 1 or ( isHBuffed() and stateAnt == 1) ):
 		flipCpu()
 
 func terminaTurnoCPU():
 	timerCpuFlips.stop()
-	if coinHBuffed:       #pasa a negro al salir de la zona prohibida
-		coinHBuffed = false
+	if isHBuffed():       #pasa a negro al salir de la zona prohibida
+		setHBuffed(false)
 		state = stateAnt
 		animSprite.animation = COIN_BASE_TYPES[state]
 
 func activateHBuff():
 	stateAnt = state
-	coinHBuffed = true
+	setHBuffed(true)
 	if stateAnt == 1:
 		animSprite.animation = COIN_HADAMARD_BLACK_TYPES[0]
 	else: #stateAnt == 0:
 		animSprite.animation = COIN_HADAMARD_WHITE_TYPES[0]
 
 func isHBuffed():
-	return coinHBuffed
+	return HBuffed
+
+func setHBuffed(cond):
+	HBuffed = cond
 
 #Pre: debe ser hijo de un CoinGenerator
 func _on_Visibility_exit_screen():
-	get_parent().deactivate_coin(self)
+	set_physics_process(false)
+	setIn_screen(false)
+	emit_signal("out_of_view")
 
 
 func setUpForMainMenu():
@@ -114,6 +135,9 @@ func setUpForCredits():
 
 func setUpForHelp():
 	setSpeed(CoinGlobals.HELP_COIN_SPEED)
+
+func setUpForGameScreen(minSpeed,maxSpeed):
+	setSpeed(rand_range(minSpeed,maxSpeed))
 
 
 

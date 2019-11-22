@@ -97,9 +97,8 @@ func _on_HUDEndless_stop_game():
 	startTimer.stop()
 	coinTimer.stop()
 	hadPUTimer.stop()
-	for coin in get_tree().get_nodes_in_group("Coins"):
-		coin.queue_free()
-	hadamardPU.init() #desaparezco el PU antes que la zonaNoTocable
+	coinGenerator.deactivate_active_coins()
+	hadamardPU.to_out_screen_position() #desaparezco el PU antes que la zonaNoTocable
 	borraZonaNoTocable()
 	borraZonaTriggerFP()
 

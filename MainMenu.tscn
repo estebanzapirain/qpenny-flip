@@ -15,7 +15,7 @@
 [ext_resource path="res://Fondo.tscn" type="PackedScene" id=13]
 [ext_resource path="res://QPF_assets/music/menu_music.ogg" type="AudioStream" id=14]
 [ext_resource path="res://BackButton.tscn" type="PackedScene" id=15]
-[ext_resource path="res://CoinPath.tscn" type="PackedScene" id=16]
+[ext_resource path="res://CoinGenerator.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
@@ -200,7 +200,7 @@ margin_bottom = 1280.87
 
 [node name="CoinsInMainMenuTimer" type="Timer" parent="."]
 
-[node name="CoinPath" parent="." instance=ExtResource( 16 )]
+[node name="CoinGenerator" parent="." instance=ExtResource( 16 )]
 [connection signal="pressed" from="InitialMenu/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
 [connection signal="pressed" from="InitialMenu/EndlessModeButton" to="." method="_on_EndlessModeButton_pressed"]
 [connection signal="pressed" from="InitialMenu/HelpButton" to="." method="_on_HelpButton_pressed"]

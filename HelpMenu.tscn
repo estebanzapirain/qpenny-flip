@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://HelpMenu.gd" type="Script" id=1]
 [ext_resource path="res://QPF_assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Fondo.tscn" type="PackedScene" id=7]
 [ext_resource path="res://BackButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://QPF_assets/music/menu_music.ogg" type="AudioStream" id=9]
+[ext_resource path="res://CoinGenerator.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -157,6 +158,7 @@ volume_db = -31.0
 autoplay = true
 bus = "Music"
 
+[node name="CoinGenerator" parent="." instance=ExtResource( 10 )]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="pressed" from="NextButton" to="." method="_on_NextButton_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]

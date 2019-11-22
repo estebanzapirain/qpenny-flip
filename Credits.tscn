@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Credits.gd" type="Script" id=1]
 [ext_resource path="res://QPF_assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://BackButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fondo.tscn" type="PackedScene" id=6]
 [ext_resource path="res://CoinPath.tscn" type="PackedScene" id=7]
+[ext_resource path="res://CoinGenerator.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -136,5 +137,6 @@ margin_bottom = 1280.0
 
 [node name="CoinPath" parent="." instance=ExtResource( 7 )]
 
+[node name="CoinGenerator" parent="." instance=ExtResource( 8 )]
 [connection signal="timeout" from="CoinsInCreditsTimer" to="." method="coin_spawn_in_credits"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]

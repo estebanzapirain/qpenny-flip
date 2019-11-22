@@ -14,7 +14,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="GETimer" type="Timer" parent="Timers" index="3"]
-
 [connection signal="back_to_level_select_menu" from="HUDArcade" to="." method="_on_HUDArcade_back_to_level_select_menu"]
 [connection signal="back_to_main_menu" from="HUDArcade" to="." method="_on_HUD_back_to_main_menu"]
 [connection signal="next_level" from="HUDArcade" to="." method="_on_HUDArcade_next_level"]

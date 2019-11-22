@@ -58,6 +58,8 @@ onready var creditsTR = get_node("CreditsTitleRight")
 onready var creditsBR1 = get_node("CreditsBodyRight1")
 onready var creditsBR2 = get_node("CreditsBodyRight2")
 
+onready var coinGenerator = $CoinGenerator
+
 onready var coinSmashSound = get_node("CoinSmash")
 
 var colorAct
@@ -139,7 +141,6 @@ func changeFontColorRight(color):
 
 func creaZonaTrigger():
 	zonaTrigger = ZonaTrigger.instance()
-	
 	add_child(zonaTrigger)
 	zonaTrigger.connect("body_entered", self, "changeColorFontsCoin")
 
@@ -162,6 +163,7 @@ func changeColorFontsCoin(coin):
 			changeFontColorLeft(Color(1,1,1))
 			changeFontColorRight(Color(1,1,1))
 	else: 
+		print("hbuffed")
 		if(coin.state == 1): #White-Black
 			changeFontColorLeft(Color(0,0,0))
 			changeFontColorRight(Color(1,1,1))
@@ -170,7 +172,7 @@ func changeColorFontsCoin(coin):
 			changeFontColorRight(Color(0,0,0))
 	
 	coinSmashSound.play()
-	coin.queue_free()
+	coinGenerator.deactivate_in_screen_coin(coin)
 	
 	if (nroCoinAct == CANT_COINS_PER_CREDIT):
 		nroCoinAct = 1
@@ -209,13 +211,7 @@ func coins_spawn_in_credits():
 	coin_spawn_in_credits() #lanzo el primer coin
 
 func coin_spawn_in_credits():
-	var coin = Coin.instance()
-	add_child(coin)
-	
-	coin.setUpForCredits()
-	CoinGlobals.setup_credits_coin_state(coin)
-	
-	coin.dropFromAboveCentered()
+	coinGenerator.dropCoinCredits()
 
 
 func _notification(notif):

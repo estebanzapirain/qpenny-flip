@@ -5,7 +5,7 @@
 [ext_resource path="res://HUDEndless.tscn" type="PackedScene" id=3]
 [ext_resource path="res://QPF_assets/music/tutorialBad.ogg" type="AudioStream" id=4]
 
-[node name="GameScreenEndless" index="0" instance=ExtResource( 1 )]
+[node name="GameScreenEndless" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="HUDEndless" parent="." index="2" instance=ExtResource( 3 )]
@@ -24,7 +24,6 @@ one_shot = true
 [node name="LiveLosedSound" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 4 )
 bus = "SFX"
-
 [connection signal="back_to_main_menu" from="HUDEndless" to="." method="_on_HUD_back_to_main_menu"]
 [connection signal="start_game" from="HUDEndless" to="." method="new_game"]
 [connection signal="stop_game" from="HUDEndless" to="." method="_on_HUDEndless_stop_game"]

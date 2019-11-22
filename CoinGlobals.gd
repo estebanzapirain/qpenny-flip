@@ -40,8 +40,6 @@ var tipAct = 1
 var helpCoinAct = 1
 var creditsCoinType = [0,1,2,3]
 
-var probTam1 = PROB_TAM1_BASE
-var probTam2 = PROB_TAM2_BASE
 
 var minCoinSpeed
 var maxCoinSpeed
@@ -55,11 +53,6 @@ func getProbFlipCPU():
 func setProbFlipCPU(value):
 	probFlipCPU = value
 
-func getProbTam1():
-	return probTam1
-
-func getProbTam2():
-	return probTam2
 
 func updateProbFlipCPU(level):
 	probFlipCPU = PROB_FLIP_BASE + PROB_FLIP_INC  * (level - 1)
@@ -137,9 +130,11 @@ func setup_credits_coin_state(coin):
 	
 	if(creditsCoinType == 0):
 		coin.state = 0
+		coin.setHBuffed(false)
 		coin.cambiaAnimacionBase() #para que coincida visualmente con el estado
 	elif(creditsCoinType == 1):
 		coin.state = 1
+		coin.setHBuffed(false)
 		coin.cambiaAnimacionBase() #para que coincida visualmente con el estado
 	else:
 		if(creditsCoinType == 2):
