@@ -95,7 +95,7 @@ func _on_MessageTimer_timeout():
 
 func _on_StartButton_pressed():
 	GameGlobals.setLevel_starting(true)
-	eliminate_coins()
+	game_over()
 	get_tree().set_pause(false)
 	GameGlobals.setPaused(false)
 	pauseMenu.hide()
@@ -112,7 +112,7 @@ func goBackToMainMenu():
 	emit_signal("back_to_main_menu")
 
 
-func eliminate_coins():
+func game_over():
 	pass
 
 

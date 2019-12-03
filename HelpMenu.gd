@@ -15,7 +15,6 @@ onready var goodTipMessage = $Messages/GoodTipMessage
 onready var badTipMessage = $Messages/BadTipMessage
 onready var untouchableMessage = $Messages/UntouchableMessage
 onready var cantTipsMessage = $Messages/CantTipsMessage
-onready var scoreTimer = $ScoreTimer
 onready var scoreMessage = $Messages/ScoreMessage
 
 onready var coinGenerator = $CoinGenerator
@@ -179,6 +178,14 @@ func coin_spawn_in_Help_Menu():
 	activateCondition()
 	coinGenerator.dropCoinHelpMenu()
 
+func change_help_tip():
+	$CoinsInHMenuTimer.stop()
+	updateMessages() #cambia los mensajes de los tips
+	eliminateCoins()
+	
+	$CoinsInHMenuTimer.start()
+	
+	coin_spawn_in_Help_Menu() #lanzo el primer coin
 
 
 func _notification(notif):
@@ -192,11 +199,3 @@ func _on_BackBtt_pressed():
 func back_to_main_menu():
 	get_tree().change_scene("res://MainMenu.tscn")
 
-func change_help_tip():
-	$CoinsInHMenuTimer.stop()
-	updateMessages() #cambia los mensajes de los tips
-	eliminateCoins()
-	
-	$CoinsInHMenuTimer.start()
-	
-	coin_spawn_in_Help_Menu() #lanzo el primer coin

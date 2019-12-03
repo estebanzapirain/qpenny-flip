@@ -4,7 +4,7 @@ const BASE_GAME_TIME = 30
 const CANT_LEVELS = 24
 const CANT_LEVELS_ENDLESS = 42
 const CANT_WORLDS = 3
-const VERSION = "1.1.1"
+const VERSION = "1.2"
 
 
 enum GAME_MODES{

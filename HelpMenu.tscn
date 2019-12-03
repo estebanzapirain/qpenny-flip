@@ -126,9 +126,6 @@ uppercase = true
 
 [node name="ScoreMessage" parent="Messages" instance=ExtResource( 4 )]
 
-[node name="ScoreTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="NextButton" parent="." instance=ExtResource( 5 )]
 margin_left = 535.0
 margin_top = 920.0
@@ -159,7 +156,6 @@ autoplay = true
 bus = "Music"
 
 [node name="CoinGenerator" parent="." instance=ExtResource( 10 )]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="pressed" from="NextButton" to="." method="_on_NextButton_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="timeout" from="CoinsInHMenuTimer" to="." method="coin_spawn_in_Help_Menu"]

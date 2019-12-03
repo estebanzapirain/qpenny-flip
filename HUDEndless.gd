@@ -86,7 +86,7 @@ func _on_StartButton_pressed():
 	._on_StartButton_pressed()
 	emit_signal("start_game")
 
-func eliminate_coins():
+func game_over():
 	emit_signal("stop_game")
 
 func update_highscore_endless(timeAchieved):

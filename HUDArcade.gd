@@ -6,6 +6,7 @@ signal next_level
 extends "HUD.gd"
 
 
+onready var congratsLabel = $PMLayer/PauseMenu/VBoxContainer/VBoxContainer2/CongratsLabel
 onready var nextRankLabel = $PMLayer/PauseMenu/VBoxContainer/VBoxContainer2/NextRankLabel
 onready var scoreStars = $PMLayer/PauseMenu/VBoxContainer/VBoxContainer2/ScoreStars
 onready var PMButtons = $PMLayer/PauseMenu/VBoxContainer/PMButtons
@@ -50,6 +51,7 @@ func setMessageFontColors(color):
 	.setMessageFontColors(color)
 	levelLabel.add_color_override("font_color",color)
 	gameTimerLabel.add_color_override("font_color",color)
+	congratsLabel.add_color_override("font_color",color)
 	nextRankLabel.add_color_override("font_color",color)
 	PMNextLevelButton.add_color_override("font_color",color)
 	PMLevelMenuButton.add_color_override("font_color",color)
@@ -88,6 +90,7 @@ func prep_game(initScore,message,gameTime,scrOneStar,scrTwoStars,scrThreeStars):
 	PMLevelMenuButton.set_position(POS_INI_LM_BUTTON)
 	PMLevelMenuButton.show()
 	PMNextLevelButton.hide()
+	congratsLabel.hide()
 	nextRankLabel.hide()
 	#game_music.stop()
 	game_music.play()
@@ -140,6 +143,16 @@ func showScoreStarsPauseMenu(lastCantStars, world, nLevel):
 		PMNextLevelButton.show()
 	
 	
+	congratsLabel.show()
+	
+	if(lastCantStars == 3):
+		congratsLabel.set_text("Excellent!")
+	elif(lastCantStars == 2):
+		congratsLabel.set_text("Amazing!")
+	elif(lastCantStars == 1):
+		congratsLabel.set_text("Good job!")
+	else:
+		congratsLabel.set_text("Try again")
 	
 	if lastCantStars < 3:
 		if(scrToNextStar == 1):
@@ -186,7 +199,6 @@ func _on_LevelMenuButton_pressed():
 func goBackToLSMenu():
 	game_music.stop()
 	hide_stars()
-	eliminate_coins()
 	get_tree().set_pause(false)
 	GameGlobals.setPaused(false)
 	#hideHUD()
@@ -208,7 +220,7 @@ func update_cantStars(world,level,cant):
 	world_cantStars[world - 1][level - 1] = cant
 	Persistance.update_cantStars(world,level,cant)
 
-func eliminate_coins():
+func game_over():
 	emit_signal("stop_game")
 
 func update_score(score):

@@ -81,19 +81,19 @@ margin_top = -179.0
 margin_right = 537.0
 margin_bottom = 209.0
 mouse_filter = 2
-color = Color( 0.929412, 0.0470588, 0.0470588, 0.521569 )
+color = Color( 0.929412, 0.0470588, 0.0470588, 0.682353 )
 
 [node name="TurnOffHPUTimer" type="Timer" parent="."]
 wait_time = 5.0
 
 [node name="AnimatedSpriteUp" type="AnimatedSprite" parent="."]
-position = Vector2( 17, -216 )
+position = Vector2( 17, -212 )
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 2 )
 animation = "on"
 
 [node name="AnimatedSpriteDown" type="AnimatedSprite" parent="."]
-position = Vector2( 17, 246 )
+position = Vector2( 17, 241 )
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 3 )
 animation = "on"
@@ -111,7 +111,6 @@ frames = SubResource( 5 )
 animation = "on"
 
 [node name="AnimationChangeTimer" type="Timer" parent="."]
-
 [connection signal="body_entered" from="ZonaNoTocable" to="." method="_on_ZonaNoTocable_body_enter"]
 [connection signal="body_exited" from="ZonaNoTocable" to="." method="_on_ZonaNoTocable_body_exit"]
 [connection signal="timeout" from="TurnOffHPUTimer" to="." method="_on_TurnOffHPUTimer_timeout"]
