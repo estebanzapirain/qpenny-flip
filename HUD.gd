@@ -69,7 +69,7 @@ func hideHUD():
 func cambiaColorLevel(nLevel):
 	var intNLevel = int(nLevel)
 	var fracNLevel = nLevel - intNLevel
-	fondo.setColorFondo(1 + fracNLevel + intNLevel % int(GameGlobals.CANT_LEVELS * float(5) / 4 )) #% GameGlobals.CANT_LEVELS)
+	fondo.setColorDirecto(GameGlobals.getCurrentColor())
 	setMessageFontColors(fondo.getColorComplementario() )
 
 
@@ -95,7 +95,7 @@ func _on_MessageTimer_timeout():
 
 func _on_StartButton_pressed():
 	GameGlobals.setLevel_starting(true)
-	eliminate_coins()
+	game_over()
 	get_tree().set_pause(false)
 	GameGlobals.setPaused(false)
 	pauseMenu.hide()
@@ -112,7 +112,7 @@ func goBackToMainMenu():
 	emit_signal("back_to_main_menu")
 
 
-func eliminate_coins():
+func game_over():
 	pass
 
 

@@ -83,8 +83,6 @@ func _on_CoinTimer_timeout():
 
 func _on_HadPowUpTimer_timeout():
 	hadPUTimer.set_wait_time( minHad_PU_WT + (randi() % int(had_PU_WT_Amp)) )
-	print("veloc hadpu")
-	print(hadamardPU.speed)
 	coinGenerator.dropHCoinGameScreen(hadamardPU)
 	
 

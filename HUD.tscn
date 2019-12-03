@@ -182,7 +182,6 @@ bus = "Music"
 [node name="MessageTimer" type="Timer" parent="Timers"]
 wait_time = 1.5
 one_shot = true
-
 [connection signal="pressed" from="PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="PMLayer/PauseMenu/VBoxContainer/PMButtons/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="PMLayer/PauseMenu/VBoxContainer/PMButtons/StartButton" to="." method="_on_StartButton_pressed"]

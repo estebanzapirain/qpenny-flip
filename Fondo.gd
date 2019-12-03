@@ -21,6 +21,9 @@ func show():
 	imagenFondo.show()
 
 func setColorDirecto(color):
+	r =color.r
+	g =color.g
+	b =color.b
 	imagenFondo.set_modulate(color )
 
 

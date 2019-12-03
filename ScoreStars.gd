@@ -57,7 +57,6 @@ func change_anim_stars(anim1, anim2, anim3):
 
 
 func _on_ShowStarTimer_timeout():
-	get_node("Star1").show()
 	get_node("Star" + str(currentStar)).show()
 	
 	get_node(effectTypes[currentStar - 1]).set_volume_db(volumeDb[currentStar - 1])

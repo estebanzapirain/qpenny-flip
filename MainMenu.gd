@@ -15,12 +15,9 @@ var LsButton = load("res://LSBt.tscn")
 
 onready var levelSelectMenu = $LevelSelectMenu 
 onready var volumeSprite = $InitialMenu/VolumeSprite
-onready var versionLabel = $InitialMenu/VersionLabel
 onready var titleLabel = $InitialMenu/TitleLabel
-onready var endlessModeBt = $InitialMenu/EndlessModeButton
-onready var levelSelectButton = $InitialMenu/LevelSelectButton
-onready var helpButton = $InitialMenu/HelpButton
 onready var creditsButton = $InitialMenu/CreditsButton
+onready var encuestaButton = $InitialMenu/EncuestaButton
 onready var backButton = $BackButton
 onready var fondo = $Fondo
 onready var menuMusic = $MenuMusic
@@ -42,7 +39,6 @@ func _ready():
 	randomize()
 	init_volume()
 	menuMusic.play()
-	versionLabel.set_text("Version " + str(GameGlobals.VERSION ) )
 	
 	hideLevelSelectMenu()
 	generate_LSButtons()
@@ -109,18 +105,12 @@ func changeFontColor(color):
 	for button in get_tree().get_nodes_in_group("LSButtons"):
 		button.add_color_override("font_color",color)
 	titleLabel.add_color_override("font_color",color)
-	endlessModeBt.add_color_override("font_color",color)
-	$InitialMenu/EndlessModeButton/Filling.set_modulate(colorInv)
-	$InitialMenu/EndlessModeButton/Borders.set_modulate(color)
+	encuestaButton.add_color_override("font_color",color)
 	volumeSprite.set_modulate(color)
-	$InitialMenu/LevelSelectButton/Filling.set_modulate(colorInv)
-	$InitialMenu/LevelSelectButton/Borders.set_modulate(color)
-	helpButton.add_color_override("font_color",color)
-	$InitialMenu/HelpButton/Filling.set_modulate(colorInv)
-	$InitialMenu/HelpButton/Borders.set_modulate(color)
+	$InitialMenu/PlayButton/Filling.set_modulate(colorInv)
+	$InitialMenu/PlayButton/Borders.set_modulate(color)
 	$InitialMenu/CreditsButton/Filling.set_modulate(colorInv)
 	$InitialMenu/CreditsButton/Borders.set_modulate(color)
-	versionLabel.add_color_override("font_color",color)
 	$BackButton/ArrowSprite.set_modulate(color)
 
 
@@ -188,8 +178,6 @@ func hideLevelSelectMenu():
 	backButton.hide()
    
 
-func _on_HelpButton_pressed():
-	cambia_escena("res://HelpMenu.tscn")
 
 
 func _on_LevelSelectButton_pressed():
@@ -216,6 +204,12 @@ func _on_BackButton_pressed():
 	hideLevelSelectMenu()
 	showInitialMenu()
 
+func _on_PlayButton_pressed():
+	cambia_escena("res://HelpMenu.tscn")
+
+func _on_EncuestaButton_pressed():
+	cambia_escena("res://Encuesta.tscn")
+
 
 func coins_spawn_in_main_menu():
 	$CoinsInMainMenuTimer.start()
@@ -233,7 +227,10 @@ func _notification(notif):
 		if(in_level_select_menu):
 			_on_BackButton_pressed()
 		else:
-			get_tree().quit()
+			pass#get_tree().quit()
+
+
+
 
 
 

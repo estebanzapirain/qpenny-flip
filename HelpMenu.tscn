@@ -1,15 +1,16 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://HelpMenu.gd" type="Script" id=1]
 [ext_resource path="res://QPF_assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://QPF_assets/art/HadamardPU.png" type="Texture" id=3]
 [ext_resource path="res://ScoreMessage.tscn" type="PackedScene" id=4]
 [ext_resource path="res://NextBackButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://CoinPath.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Fondo.tscn" type="PackedScene" id=7]
-[ext_resource path="res://BackButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://QPF_assets/music/menu_music.ogg" type="AudioStream" id=9]
-[ext_resource path="res://CoinGenerator.tscn" type="PackedScene" id=10]
+[ext_resource path="res://PlayButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://CoinPath.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Fondo.tscn" type="PackedScene" id=8]
+[ext_resource path="res://BackButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://QPF_assets/music/menu_music.ogg" type="AudioStream" id=10]
+[ext_resource path="res://CoinGenerator.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -126,14 +127,18 @@ uppercase = true
 
 [node name="ScoreMessage" parent="Messages" instance=ExtResource( 4 )]
 
-[node name="ScoreTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="NextButton" parent="." instance=ExtResource( 5 )]
 margin_left = 535.0
 margin_top = 920.0
 margin_right = 720.0
 margin_bottom = 1021.0
+
+[node name="PlayButton" parent="." instance=ExtResource( 6 )]
+margin_left = 552.151
+margin_top = 900.751
+margin_right = 909.151
+margin_bottom = 1260.75
+rect_scale = Vector2( 0.4, 0.4 )
 
 [node name="BackButton" parent="." instance=ExtResource( 5 )]
 margin_left = -1.0
@@ -144,23 +149,23 @@ margin_bottom = 1021.0
 [node name="CoinsInHMenuTimer" type="Timer" parent="."]
 wait_time = 6.0
 
-[node name="CoinPath" parent="." instance=ExtResource( 6 )]
+[node name="CoinPath" parent="." instance=ExtResource( 7 )]
 
-[node name="Fondo" parent="." instance=ExtResource( 7 )]
+[node name="Fondo" parent="." instance=ExtResource( 8 )]
 
-[node name="BackBtt" parent="." instance=ExtResource( 8 )]
+[node name="BackBtt" parent="." instance=ExtResource( 9 )]
 margin_top = 1194.0
 margin_bottom = 1280.0
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource( 10 )
 volume_db = -31.0
 autoplay = true
 bus = "Music"
 
-[node name="CoinGenerator" parent="." instance=ExtResource( 10 )]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[node name="CoinGenerator" parent="." instance=ExtResource( 11 )]
 [connection signal="pressed" from="NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="timeout" from="CoinsInHMenuTimer" to="." method="coin_spawn_in_Help_Menu"]
 [connection signal="pressed" from="BackBtt" to="." method="_on_BackBtt_pressed"]

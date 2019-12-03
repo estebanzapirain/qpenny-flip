@@ -9,6 +9,7 @@ onready var GETimer = $Timers/GETimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	levelAct = 20
 	hud = $HUDArcade
 	hud.showHUD(1,levelAct)
 
@@ -120,10 +121,10 @@ func stop_coin_spawn():
 func _notification(notif):
 	if notif == MainLoop.NOTIFICATION_WM_QUIT_REQUEST || notif == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST: 
 		if(game_screen == GAME_SCREEN.GAME_ENDED):
-			goBackToLSMenu()
+			goBackToMainMenu()
 		elif(game_screen == GAME_SCREEN.IN_GAME):
 			if(GameGlobals.isPaused()):
-				goBackToLSMenu()
+				goBackToMainMenu()
 			else:
 				pause()
 		#elif(game_screen == GAME_SCREEN.GAME_ENDING):

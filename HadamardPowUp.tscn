@@ -20,7 +20,7 @@ scale = Vector2( 0.3, 0.3 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -10.0066, 2.0067 )
+position = Vector2( -1, 0 )
 rotation = 1.56742
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )

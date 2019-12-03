@@ -15,8 +15,8 @@ onready var goodTipMessage = $Messages/GoodTipMessage
 onready var badTipMessage = $Messages/BadTipMessage
 onready var untouchableMessage = $Messages/UntouchableMessage
 onready var cantTipsMessage = $Messages/CantTipsMessage
-onready var scoreTimer = $ScoreTimer
 onready var scoreMessage = $Messages/ScoreMessage
+onready var playButton = $PlayButton
 
 onready var coinGenerator = $CoinGenerator
 
@@ -32,6 +32,7 @@ func _ready():
 	hadPUSprite.set_position(Vector2(70,349))
 	backButton.point_back()
 	backButton.hide()
+	playButton.hide()
 	
 	creaZonaNoTocable()
 	creaZonaTriggerFP()
@@ -52,6 +53,11 @@ func _ready():
 
 func changeColor(color,colorComp):
 	$Fondo.setColorDirecto(color)
+	$BackBtt/ArrowSprite.set_modulate(colorComp)
+	nextButton.changeArrowColor(colorComp)
+	backButton.changeArrowColor(colorComp)
+	$PlayButton/Borders.set_modulate(colorComp)
+	$PlayButton/Filling.set_modulate(color)
 	changeFontColor(colorComp)
 
 func creaZonaNoTocable():
@@ -124,9 +130,7 @@ func activateCondition():
 func changeFontColor(color):
 	untouchableMessage.add_color_override("font_color",color)
 	cantTipsMessage.add_color_override("font_color",color)
-	$BackBtt/ArrowSprite.set_modulate(color)
-	nextButton.changeArrowColor(color)
-	backButton.changeArrowColor(color)
+	
 
 
 func _on_NextButton_pressed():
@@ -139,6 +143,7 @@ func _on_NextButton_pressed():
 	
 	if(tipAct == CoinGlobals.CANT_TIPS):
 		nextButton.hide()
+		playButton.show()
 	elif (tipAct == 2):
 		backButton.show()
 	
@@ -157,6 +162,7 @@ func _on_BackButton_pressed():
 		backButton.hide()
 	elif (tipAct == CoinGlobals.CANT_TIPS - 1):
 		nextButton.show()
+		playButton.hide()
 	
 	CoinGlobals.reset_help_coin_act()
 	change_help_tip()
@@ -179,6 +185,14 @@ func coin_spawn_in_Help_Menu():
 	activateCondition()
 	coinGenerator.dropCoinHelpMenu()
 
+func change_help_tip():
+	$CoinsInHMenuTimer.stop()
+	updateMessages() #cambia los mensajes de los tips
+	eliminateCoins()
+	
+	$CoinsInHMenuTimer.start()
+	
+	coin_spawn_in_Help_Menu() #lanzo el primer coin
 
 
 func _notification(notif):
@@ -192,11 +206,7 @@ func _on_BackBtt_pressed():
 func back_to_main_menu():
 	get_tree().change_scene("res://MainMenu.tscn")
 
-func change_help_tip():
-	$CoinsInHMenuTimer.stop()
-	updateMessages() #cambia los mensajes de los tips
-	eliminateCoins()
-	
-	$CoinsInHMenuTimer.start()
-	
-	coin_spawn_in_Help_Menu() #lanzo el primer coin
+
+
+func _on_PlayButton_pressed():
+	get_tree().change_scene("res://GameScreenArcade.tscn")

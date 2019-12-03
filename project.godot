@@ -25,6 +25,7 @@ config/quit_on_go_back=false
 CoinGlobals="*res://CoinGlobals.gd"
 Persistance="*res://Persistance.gd"
 GameGlobals="*res://GameGlobals.gd"
+RedGodot="*res://red_en_godot.gd"
 
 [debug]
 
