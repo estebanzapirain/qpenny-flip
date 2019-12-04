@@ -6,19 +6,34 @@ const HOST = "gti.fi.mdp.edu.ar"
 const PORT = 80
 const BASIC_HEADERS = ["User-Agent: PDTZ_2D/1.0", "Accept: */*"]
 
-const FILE_NAME = "user://events.save"
+const DIR_NAME = "Datos encuesta QPF"
+const FILE_NAME = "encuesta.dat"
+
+#const FILE_NAME = "user://events.save"
+
+var filePath
 
 # Connection variables
 var http = null
 var is_connected = false
 
 func _ready():
+	updateSaveFilePathFromOS()
 	checkCreateFile()
+
+#to get the external storage path from OS
+func updateSaveFilePathFromOS():
+	
+	var dirPath = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+	var dir = Directory.new()
+	dir.open(dirPath)
+	dir.make_dir(DIR_NAME)
+	filePath = dirPath + "/" + DIR_NAME + "/" +FILE_NAME
 
 func checkCreateFile():
 	var save_game = File.new()
-	if(save_game.open(FILE_NAME, File.READ_WRITE) != 0):
-		save_game.open(FILE_NAME, File.WRITE)
+	if(save_game.open(filePath, File.READ_WRITE) != 0):
+		save_game.open(filePath, File.WRITE)
 	save_game.close()
 
 
@@ -69,10 +84,11 @@ func postHttp(query):
 
 func appendToFile(query):
 	var save_game = File.new()
-	save_game.open(FILE_NAME, File.READ_WRITE)
+	save_game.open(filePath, File.READ_WRITE)
 	save_game.seek_end()
 	save_game.store_line(to_json(query))
 	save_game.close()
+	
 
 
 
