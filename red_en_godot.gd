@@ -80,7 +80,7 @@ func postHttp(query):
 			http.poll()
 			OS.delay_msec(50)
 		
-		print("se mando nomas")
+		print("se mando una encuesta al sv")
 
 func appendToFile(query):
 	var save_game = File.new()

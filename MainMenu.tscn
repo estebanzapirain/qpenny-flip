@@ -5,8 +5,8 @@
 [ext_resource path="res://PlayButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://QPF_assets/art/creditsIcon/Credits_icon_borders.png" type="Texture" id=4]
 [ext_resource path="res://QPF_assets/art/creditsIcon/Credits_icon_filling.png" type="Texture" id=5]
-[ext_resource path="res://QPF_assets/art/fullVolumeIcon.png" type="Texture" id=6]
-[ext_resource path="res://QPF_assets/art/volumeMutedIcon.png" type="Texture" id=7]
+[ext_resource path="res://QPF_assets/art/volumeMutedIcon.png" type="Texture" id=6]
+[ext_resource path="res://QPF_assets/art/fullVolumeIcon.png" type="Texture" id=7]
 [ext_resource path="res://Fondo.tscn" type="PackedScene" id=8]
 [ext_resource path="res://QPF_assets/music/menu_music.ogg" type="AudioStream" id=9]
 [ext_resource path="res://BackButton.tscn" type="PackedScene" id=10]
@@ -28,12 +28,12 @@ font_data = ExtResource( 2 )
 animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": false,
-"name": "unmuted",
+"name": "muted",
 "speed": 0.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": false,
-"name": "muted",
+"name": "unmuted",
 "speed": 0.0
 } ]
 

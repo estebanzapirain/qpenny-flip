@@ -1,4 +1,4 @@
 The following permissions will have to be seted:
-Read external Storage
-Write external Storage
 Internet
+
+Storage permission must be granted manually after install
