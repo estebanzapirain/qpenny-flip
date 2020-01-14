@@ -1,5 +1,7 @@
 # Quantum Penny Flip
 <p align=justify>
+Hello!
+
 Quantum Penny Flip (QPF) is the first of the Quantum Serious Games (QSG) series, developed by the Group of Research in Interactive Technologies (GTI) @ Universidad Nacional de Mar del Plata, Argentina.
 
 The aim of this series is to provide interactive experiences to visualize quantum effects, specially those applicable to quantum computing. These can aid education, research and development in the quantum computing field.
